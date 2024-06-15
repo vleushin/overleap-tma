@@ -65,6 +65,7 @@ const backgroundColor = computed(() => {
   let [color, topColor, bottomColor] = bgColors[Math.floor(Math.random() * bgColors.length)]
 
   if (props.id !== undefined) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     [color, topColor, bottomColor] = bgColors[props.id % 7]
   }
 

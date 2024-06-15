@@ -173,6 +173,6 @@ export const useTripDetails = createSharedComposable((): useTripDetailsComposabl
     trip,
     location,
     selectDefault,
-    days
+    days,
   }
 })

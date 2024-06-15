@@ -16,7 +16,7 @@ import { darkenColor } from './infra/utils/color'
  * @todo cancel payment toast
  */
 
-const { platform, ready, showAlert } = useTelegram()
+const { platform, ready } = useTelegram()
 
 if (platform !== 'unknown') {
   switch (platform) {

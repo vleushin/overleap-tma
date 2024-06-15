@@ -1,4 +1,4 @@
-import { computed, type ComputedRef} from 'vue'
+import { computed, type ComputedRef } from 'vue'
 import { CHAIN, toUserFriendlyAddress } from '@tonconnect/ui'
 import { useTonWallet } from './useTonWallet'
 

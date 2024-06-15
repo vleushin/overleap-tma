@@ -117,7 +117,7 @@ module.exports = {
      */
   overrides: [
     {
-      files: ['*.js', '*.tsx'],
+      files: ['*.js', '*.tsx', '*.ts', '*.vue'],
       rules: {
         '@typescript-eslint/explicit-function-return-type': 'off',
         '@typescript-eslint/strict-boolean-expressions': 'off',

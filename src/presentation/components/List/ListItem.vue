@@ -80,6 +80,7 @@ const hasPicture = computed(() => {
  * - medium - 40px
  * - big - 76px
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const pictureSize = computed(() => {
   if (props.bigAvatar) {
     return 'big'
@@ -103,6 +104,7 @@ const pictureSize = computed(() => {
 /**
  * Rounding style of a picture: square or circle
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const pictureStyle = computed(() => {
   if (!hasPicture.value) {
     return undefined

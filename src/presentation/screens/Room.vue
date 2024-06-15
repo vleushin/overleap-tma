@@ -317,7 +317,6 @@ onBeforeUnmount(() => {
   }
 }
 
-
 @keyframes shake {
   0% {
     transform: rotate(-10deg) scale(0.2);

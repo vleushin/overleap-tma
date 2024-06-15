@@ -16,6 +16,7 @@ import DatePickerCompact from './DatePicker/DatePickerCompact.vue'
 import Input from './Input/Input.vue'
 import Text from './Text/Text.vue'
 import Rating from './Rating/Rating.vue'
+import Rive from './Rive/Rive.vue'
 import FixedFooter from './Page/FixedFooter.vue'
 import Lottie from './Lottie/Lottie.vue'
 import TonConnectButton from './TonConnectButton/TonConnectButton.vue'
@@ -41,6 +42,7 @@ export {
   Input,
   Text,
   Rating,
+  Rive,
   FixedFooter,
   Lottie,
   TonConnectButton,

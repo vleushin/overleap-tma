@@ -2,7 +2,7 @@
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { useTelegram } from '@/application/services'
 
-const { headerColor, setHeaderColor, colorScheme, platform} = useTelegram()
+const { headerColor, setHeaderColor, colorScheme, platform } = useTelegram()
 
 const header = ref<HTMLDivElement | null>(null)
 const headerHeight = ref(59)
@@ -51,7 +51,6 @@ onBeforeUnmount(() => {
     </div>
   </div>
 </template>
-
 
 <style scoped>
 .page {

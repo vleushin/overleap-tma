@@ -39,7 +39,6 @@ defineProps<{
   }
 }
 
-
 @keyframes jump-in {
   0% {
     transform: scale(0.8);

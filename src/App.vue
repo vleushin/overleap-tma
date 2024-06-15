@@ -5,12 +5,15 @@ import { TonConnectUIProvider } from '@/presentation/components'
 
 import mixpanel from 'mixpanel-browser'
 
-mixpanel.init('89b8250840a021dcff3d9b8204c38788', {
-  debug: true,
-  track_pageview: true,
-  ignore_dnt: true,
-  persistence: 'localStorage',
-})
+if (process.env.MIXPANEL_TOKEN) {
+  mixpanel.init(process.env.MIXPANEL_TOKEN, {
+    debug: true,
+    track_pageview: true,
+    ignore_dnt: true,
+    persistence: 'localStorage',
+  })
+  mixpanel.track('Tracking after mixpanel.init')
+}
 
 const { colorScheme } = useTelegram()
 
@@ -37,14 +40,16 @@ onBeforeMount(() => {
 
 <template>
   <TonConnectUIProvider
-    :manifestUrl="'https://gist.githubusercontent.com/vleushin/2b277da333b26d5724dd61d035d899db/raw/67d05f9690167e795a4be173442eaab70e892aa7/gistfile1.txt'">
+    :manifest-url="'https://gist.githubusercontent.com/vleushin/2b277da333b26d5724dd61d035d899db/raw/67d05f9690167e795a4be173442eaab70e892aa7/gistfile1.txt'"
+  >
     <div class="app">
-      <div class="app-header"></div><!--Teleport location for PageWithHeader component-->
+      <div class="app-header" /><!--Teleport location for PageWithHeader component-->
       <RouterView v-slot="{ Component }">
         <transition
           name="default-segue"
-          @before-enter="onBeforeSegue">
-          <component :is="Component"/>
+          @before-enter="onBeforeSegue"
+        >
+          <component :is="Component" />
         </transition>
       </RouterView>
     </div>

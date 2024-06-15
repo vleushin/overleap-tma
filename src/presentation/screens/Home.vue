@@ -2,34 +2,21 @@
 <script setup lang="ts">
 import {
   Placeholder,
-  List,
-  ListItem,
-  ListItemExpandable,
-  Sections,
-  Section,
-  ListCard,
-  DatePicker,
-  DatePickerCompact,
-  Amount,
-  Rating,
-  Text,
+  type Section,
+  type DatePicker,
   Lottie,
-  TonConnectButton, Video,
+  TonConnectButton,
 } from '@/presentation/components'
-import {onMounted, ref, onBeforeUnmount, watchEffect, watch} from 'vue'
-import {useTripDetails} from '@/domain/services/useTripDetails'
-import {useTelegram, useScroll, useLottie} from '@/application/services'
-import {hotels} from '@/infra/store/hotels/mock/hotels'
-import {shortNumber} from '@/infra/utils/number'
-import {type Hotel} from '@/domain/entities'
+import { onMounted, ref, onBeforeUnmount, watchEffect, watch } from 'vue'
+import { useTripDetails } from '@/domain/services/useTripDetails'
+import { useTelegram, useScroll, useLottie } from '@/application/services'
+import { hotels } from '@/infra/store/hotels/mock/hotels'
+import { type Hotel } from '@/domain/entities'
 
 const {
   trip,
-  location,
   selectDefault: selectDefaultLocation,
-  setStartDate,
   setEndDate,
-  days,
 } = useTripDetails()
 
 /**
@@ -58,9 +45,9 @@ const isSearchFinished = ref(false)
  */
 const result = ref<Hotel[]>([])
 
-const {showMainButton, hideMainButton, setButtonLoader, expand, getViewportHeight, vibrate} = useTelegram()
-const {scrollTo} = useScroll()
-const {animationData} = useLottie('simp')
+const { hideMainButton, setButtonLoader, expand, getViewportHeight, vibrate } = useTelegram()
+const { scrollTo } = useScroll()
+const { animationData } = useLottie('simp')
 
 /**
  * Reference to the dates/location form wrapper
@@ -70,7 +57,7 @@ const searchSettings = ref<InstanceType<typeof Section> | null>(null)
 /**
  * Height of the dates/location form wrapper. Used in CSS to calculate landing height
  */
-const searchSettingsHeight = ref(130)
+const searchSettingsHeight = ref(40)
 
 /**
  * Reference to the date pickers
@@ -130,6 +117,7 @@ function onAfterSearch(): void {
 /**
  * Fake search method
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function search(): void {
   onBeforeSearch()
 
@@ -154,6 +142,7 @@ function search(): void {
 /**
  * Handle start date click
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function onStartDateClick(): void {
   expand()
   startDatePickerShowed.value = !startDatePickerShowed.value
@@ -163,6 +152,7 @@ function onStartDateClick(): void {
 /**
  * Handle end date click
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function onEndDateClick(): void {
   expand()
   endDatePickerShowed.value = !endDatePickerShowed.value
@@ -266,7 +256,7 @@ onBeforeUnmount(() => {
       </template>
     </Placeholder>
     <div class="tonconnect-button">
-      <TonConnectButton/>
+      <TonConnectButton />
     </div>
     <!--    <Sections>-->
     <!--      <Section padded>-->
@@ -433,7 +423,7 @@ onBeforeUnmount(() => {
   padding-block: 20px;
 
   &:not(&--loaded) {
-    height: calc(var(--tg-viewport-stable-height) - v-bind('searchSettingsHeight + "px"') - var(--size-cell-h-margin) - var(--size-cell-v-margin) - v-bind('startDatePickerHeight + "px"') - v-bind('endDatePickerHeight + "px"'));
+    height: calc(v-bind('searchSettingsHeight + "px"') - var(--size-cell-h-margin) - var(--size-cell-v-margin));
   }
 
   &--loading,

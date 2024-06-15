@@ -130,6 +130,7 @@ function reserveSpace(): void {
   const cardRect = card.value.getBoundingClientRect()
 
   void nextTick(() => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     card.value!.style.position = 'fixed'
 
     /**

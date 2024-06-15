@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import {Video} from "@/presentation/components";
+import { Video } from '@/presentation/components'
+import Rive from '@/presentation/components/Rive/Rive.vue'
 
 defineProps<{
   /**
@@ -30,7 +31,7 @@ defineProps<{
   /**
    * Filename of of the video file to play
    */
-  videoFilename? : string;
+  videoFilename?: string;
 }>()
 </script>
 
@@ -60,13 +61,23 @@ defineProps<{
       {{ linkText }}
     </a>
 
-    <video v-if="videoFilename" class="intro-video" width="320" height="180" muted autoplay loop>
+    <video
+      v-if="videoFilename"
+      class="intro-video"
+      width="320"
+      height="180"
+      muted
+      autoplay
+      loop
+      playsinline="true"
+    >
       <source
         :src="videoFilename"
         type="video/mp4"
-      />
+      >
       Your browser does not support the video tag.
     </video>
+    <!--    <Rive src="/intro.riv"></Rive>-->
   </div>
 </template>
 
