@@ -423,7 +423,7 @@ onBeforeUnmount(() => {
   padding-block: 20px;
 
   &:not(&--loaded) {
-    height: calc(v-bind('searchSettingsHeight + "px"') - var(--size-cell-h-margin) - var(--size-cell-v-margin));
+    height: calc(var(--tg-viewport-stable-height) - v-bind('searchSettingsHeight + "px"') - var(--size-cell-h-margin) - var(--size-cell-v-margin) - v-bind('startDatePickerHeight + "px"') - v-bind('endDatePickerHeight + "px"'));
   }
 
   &--loading,
