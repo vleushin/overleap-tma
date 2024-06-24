@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted } from "vue";
+import { onBeforeRouteLeave } from 'vue-router';
 import { navigateTo, useRuntimeConfig } from "nuxt/app";
 import useTelegram from "../composables/useTelegram";
 import { useTonConnectUI } from "../composables/useTonConnectUI";
@@ -15,15 +16,19 @@ const { tonBalance, usdtBalance } = useBalances();
 const { tonConnectUI, setOptions: setTonConnectOptions } = useTonConnectUI();
 const { address: fromAddress } = useTonAddress();
 const startParam = WebApp.initDataUnsafe.start_param;
-const { toAddress, toName, toPrice } = useToAddress(startParam || '');
+const { toAddress, toHashedId, toName, toPrice } = useToAddress(startParam || '');
 const { animationData } = useLottie('deal');
 const textToSend = ref('');
 
 const runtimeConfig = useRuntimeConfig();
 
-type PostTxType = {
-  payload: string
-  fromAddressUsdtWallet: string
+type PostPrepareTxType = {
+  validUntil: number
+  messages: []
+}
+
+type PostSentTxType = {
+  txHash: string
 }
 
 const sendTx = async (fromAddress: string, toAddress: string, price: string) => {
@@ -31,41 +36,39 @@ const sendTx = async (fromAddress: string, toAddress: string, price: string) => 
     return;
   }
 
-  const { data } = await useFetch<PostTxType>('/api/tx', {
+  const { data } = await useFetch<PostPrepareTxType>('/api/prepareTx', {
     method: 'POST',
-    params: {
+    body: {
       fromAddress,
       toAddress,
-      price
+      price,
+      message: textToSend.value,
     },
     headers: {
       'Authorization': `tma ${WebApp.initData}`
     }
   });
   if (data.value) {
-    const payload = data.value.payload;
-    const fromAddressUsdtWallet = data.value.fromAddressUsdtWallet;
+    const result = await tonConnectUI.sendTransaction(data.value);
+    console.log(result);
 
-    const transaction = {
-      validUntil: Math.floor(Date.now() / 1000) + 60, // 60 sec
-      messages: [
-        {
-          address: fromAddressUsdtWallet,
-          amount: "60000000",
-          payload: payload
-        }
-      ]
-    };
+    const { data: txData } = await useFetch<PostSentTxType>('/api/sentTx', {
+      method: 'POST',
+      body: {
+        fromAddress,
+        toAddress,
+        toHashedId: startParam,
+        price,
+        message: textToSend.value,
+        boc: result.boc
+      },
+      headers: {
+        'Authorization': `tma ${WebApp.initData}`
+      }
+    });
 
-    try {
-      const result = await tonConnectUI.sendTransaction(transaction);
-      console.log(result);
-
-      // you can use signed boc to find the transaction
-      //const someTxData = await myAppExplorerService.getTransaction(result.boc);
-      //alert('Transaction was sent successfully', someTxData);
-    } catch (e) {
-      console.error(e);
+    if (txData.value) {
+      navigateTo(`/txSent?txHash=${txData.value.txHash}`);
     }
   }
 };
@@ -85,19 +88,19 @@ const showMainButton = () => {
 
 const telegram = useTelegram();
 onMounted(() => {
+  console.log('onMounted send!')
   showMainButton();
   watch(fromAddress, (newValue, oldValue) => {
     showMainButton();
   });
   telegram.showBackButton(() => {
-    console.log("BACK");
-    //setTonConnectOptions({ buttonRootId: null });
     navigateTo('/');
   });
   WebApp.ready();
 });
 
-onUnmounted(() => {
+onBeforeRouteLeave(() => {
+  console.log('onUnmounted send!')
   telegram.hideBackButton();
   telegram.hideMainButton();
 });

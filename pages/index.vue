@@ -25,7 +25,6 @@ const resetTutorial = () => {
 };
 
 const handleSendClick = () => {
-  //setTonConnectOptions({ buttonRootId: null });
   navigateTo('/send');
 };
 
@@ -49,7 +48,7 @@ onMounted(() => {
 </script>
 <template>
   <div class="home-page">
-    <Placeholder v-if="!userWalletInStorage" ref="landing" class="landing" title="Overleap"
+    <Placeholder v-if="!address" ref="landing" class="landing" title="Overleap"
       caption="Prove your intent to connect by rewarding the reader with a commission"
       video-filename="/overleap-intro.mp4">
       <template #picture>
@@ -68,7 +67,9 @@ onMounted(() => {
     </div>
     <div class="bottom-buttons-container">
       <div v-if="startParam" class="secondary-button" @click="handleSendClick">✉️ Send</div>
+      <!-- <div class="secondary-button" @click="navigateTo('/txSent')">💡 Tx</div> -->
       <div class="secondary-button" @click="navigateTo('/tutorial')">💡 Tutorial</div>
+      <div class="secondary-button" @click="navigateTo('https://t.me/overleap_app', { external: true, open: { target: '_blank' }})">🤘 Community</div>
       <div class="secondary-button"
         @click="navigateTo('https://telegra.ph/FAQ--Overleap-06-21', { external: true, open: { target: '_blank' } })">🤔 FAQ
       </div>
@@ -134,10 +135,13 @@ h3 {
 }
 
 .bottom-buttons-container {
+  padding: 10px;
   margin-top: var(--spacing-28);
   display: flex;
   flex-flow: row;
-  justify-content: space-evenly;
+  gap: var(--spacing-10);
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .secondary-button {

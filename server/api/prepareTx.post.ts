@@ -4,10 +4,10 @@ import { findWalletUsdtJettonAddress } from "../../utils/usdt";
 export default defineEventHandler(async (event) => {
   const runtimeConfig = useRuntimeConfig(event);
 
-  const query = getQuery(event);
-  const fromAddress = query.fromAddress as string;
-  const toAddress = query.toAddress as string;
-  const price = query.price as string;
+  const body = await readBody(event)
+  const fromAddress = body.fromAddress as string;
+  const toAddress = body.toAddress as string;
+  const price = body.price as string;
 
   const forwardPayload = beginCell()
     .storeAddress(Address.parse(toAddress))
@@ -26,11 +26,17 @@ export default defineEventHandler(async (event) => {
     .storeRef(forwardPayload)
     .endCell();
 
-    const fromAddressUsdtWallet = await findWalletUsdtJettonAddress(fromAddress).toString();
-
+  const fromAddressUsdtWallet = await findWalletUsdtJettonAddress(fromAddress).toString();
+  const payloadBase64 = payload.toBoc().toString('base64');
   return {
-    payload: payload.toBoc().toString('base64'),
-    fromAddressUsdtWallet: fromAddressUsdtWallet
+    validUntil: Math.floor(Date.now() / 1000) + 60, // 60 sec
+    messages: [
+      {
+        address: fromAddressUsdtWallet,
+        amount: "60000000",
+        payload: payloadBase64
+      }
+    ]
   };
 });
 

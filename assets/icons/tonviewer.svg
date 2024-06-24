@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg version="1.1" viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <clipPath id="__lottie_element_118">
+   <rect width="360" height="360"/>
+  </clipPath>
+  <linearGradient id="__lottie_element_174" x1="-106.72" x2="7.971" y1="-1.52" y2="-1.01" gradientUnits="userSpaceOnUse">
+   <stop stop-color="#78a8fc" offset="0"/>
+   <stop stop-color="#4f74ec" offset=".5"/>
+   <stop stop-color="#2640dc" offset="1"/>
+  </linearGradient>
+ </defs>
+ <g clip-path="url(#__lottie_element_118)">
+  <g transform="translate(180 180)" display="block">
+   <g>
+    <path d="m0.047-142.89s-126.89 142.83-126.89 142.83l2.183 2.473s124.62 139.9 124.62 139.9l126.3-141.55s0.78899-0.907 0.78899-0.907l-127.01-142.75z" fill="url(#__lottie_element_174)"/>
+   </g>
+  </g>
+  <g transform="matrix(4 0 0 -4 179 325)" display="none">
+   <g transform="translate(16.25 18.25)">
+    <path d="m10.005 19.893 3.215 2.4772s-24.76-40.111-24.76-40.111 21.545 37.633 21.545 37.633z" fill="#0f1d9d"/>
+   </g>
+  </g>
+  <g transform="matrix(4 0 0 -4 179.01 325)" display="none">
+   <g transform="translate(8.25 18.25)">
+    <path d="m-5.6578-17.792s26.171 35.38 26.171 35.38l2.8964 2.8963-29.067-38.276z" fill="#0f1d9d"/>
+   </g>
+  </g>
+  <g transform="matrix(4 0 0 -4 115 325)" display="none">
+   <g transform="translate(8.25 18.25)">
+    <path d="m6.479-17.544 30.556 31.901s2.8592 3.0327 2.8592 3.0327-33.415-34.934-33.415-34.934z" fill="#102dc6"/>
+   </g>
+  </g>
+  <g transform="matrix(4 0 0 -4 51.002 325)" display="none">
+   <g transform="translate(16.25 18.25)">
+    <path d="m11.75-17.778s30.996 31.948 30.996 31.948l1.9359 1.6972-32.931-33.645z" fill="#0f23ae"/>
+   </g>
+  </g>
+  <g transform="matrix(4 0 0 -4 51.002 325)" display="block">
+   <g transform="translate(16.3 18.25)">
+    <path d="m15.898-18.008 16.055 36.008 15.996-0.0039997s-32.051-36.004-32.051-36.004z" fill="#0f1d9d"/>
+   </g>
+   <g transform="translate(16.25 18.25)">
+    <path d="m16-17.996 0.0079994 36.004 16-0.0079994s-16.008-35.996-16.008-35.996z" fill="#102dc6"/>
+    <path d="m16-18-16 36s16.008 0.0079994 16.008 0.0079994l-0.0079994-36.008z" fill="#2e5fdc"/>
+    <path d="m16-18-32 36s16.004 0.0039997 16.004 0.0039997 15.996-36.004 15.996-36.004z" fill="#4486eb"/>
+   </g>
+  </g>
+  <g transform="matrix(4 0 0 4 179 35)" display="none">
+   <g transform="translate(16.25 18.25)">
+    <path d="m10.076 16.175 3.2831-2.5669-33.825-31.359s30.542 33.926 30.542 33.926z" fill="#213dd1"/>
+   </g>
+  </g>
+  <g transform="matrix(4 0 0 4 179.01 35.002)" display="none">
+   <g transform="translate(8.25 18.25)">
+    <path d="m-8.5355-17.532s31.978 36.038 31.978 36.038l0.30531-1.0283s-32.284-35.009-32.284-35.009z" fill="#213dd1"/>
+   </g>
+  </g>
+  <g transform="matrix(4 0 0 4 115 35.002)" display="none">
+   <g transform="translate(8.25 18.25)">
+    <path d="m10.097-17.497 28.453 38.956 1.1782-1.6156s-29.631-37.341-29.631-37.341z" fill="#2121be"/>
+   </g>
+  </g>
+  <g transform="matrix(4 0 0 4 51.002 35)" display="none">
+   <g transform="translate(16.25 18.25)">
+    <path d="m19.754-17.746 22.93 39.871 2.1227-1.929s-25.052-37.942-25.052-37.942z" fill="#213dd1"/>
+   </g>
+  </g>
+  <g transform="matrix(4 0 0 4 51.002 35)" display="block">
+   <g transform="translate(16.25 18.25)">
+    <path d="m16-18 16.004 36 16 0.0039997-32.004-36.004z" fill="#213dd1"/>
+    <path d="m16-17.996 0.0079994 36.004 16-0.0079994s-16.008-35.996-16.008-35.996z" fill="#3346f6"/>
+    <path d="m16-18-16 36s16.008 0.0079994 16.008 0.0079994l-0.0079994-36.008z" fill="#4576f3"/>
+    <path d="m16-18-32 36s16.004 0.0039997 16.004 0.0039997 15.996-36.004 15.996-36.004z" fill="#89b8ff"/>
+   </g>
+  </g>
+ </g>
+</svg>

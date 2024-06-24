@@ -2,6 +2,7 @@ import { ref, type Ref } from 'vue';
 
 interface useToAddressState {
   toAddress: Ref<string>;
+  toHashedId: Ref<string>;
   toName: Ref<string>;
   toPrice: Ref<string>;
   isReady: Ref<boolean>;
@@ -9,6 +10,7 @@ interface useToAddressState {
 }
 
 const toAddress = ref('');
+const toHashedId = ref('');
 const toName = ref('');
 const toPrice = ref('');
 const isReady = ref(false);
@@ -28,6 +30,7 @@ export const useToAddress = (hashedId: string): useToAddressState => {
     }).then((result) => {
       if (result.data) {
         toAddress.value = result.data.value!.address;
+        toHashedId.value = hashedId;
         toName.value = result.data.value!.name;
         toPrice.value = String(result.data.value!.price);
         isReady.value = true;
@@ -39,5 +42,5 @@ export const useToAddress = (hashedId: string): useToAddressState => {
     });
   }
 
-  return { toAddress, toPrice, toName, isReady, isLoading };
+  return { toAddress, toHashedId, toPrice, toName, isReady, isLoading };
 };

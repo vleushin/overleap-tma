@@ -11,7 +11,12 @@ const props = defineProps<{
 
 onMounted(() => {
   const { setOptions } = useTonConnectUI();
-  setOptions({ buttonRootId: props.buttonRootId });
+  setOptions({
+    buttonRootId: props.buttonRootId,
+    uiPreferences: {
+      theme: 'SYSTEM'
+    }
+  });
 });
 
 onUnmounted(() => {

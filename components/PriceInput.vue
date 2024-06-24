@@ -23,7 +23,7 @@ onMounted(async () => {
     <span class="icon-price" v-html="usdtSvgSource" />
     <div class="input">
       <input
-type="text" :placeholder="placeholder" :value="modelValue"
+type="number" :placeholder="placeholder" :value="modelValue"
         @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)">
     </div>
     <span class="token-name">USD₮</span>

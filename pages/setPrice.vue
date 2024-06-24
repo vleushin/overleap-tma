@@ -2,6 +2,7 @@
 import useTelegram from "../composables/useTelegram";
 import useLottie from "../composables/useLottie";
 import { ref, onMounted, onUnmounted } from "vue";
+import { onBeforeRouteLeave } from 'vue-router';
 import { navigateTo } from "nuxt/app";
 import { usePrice } from "../composables/usePrice";
 import Lottie from "../components/Lottie.vue";
@@ -25,7 +26,7 @@ onMounted(() => {
   });
 });
 
-onUnmounted(() => {
+onBeforeRouteLeave(() => {
   telegram.hideBackButton();
   telegram.hideMainButton();
 });
