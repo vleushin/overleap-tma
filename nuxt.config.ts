@@ -50,12 +50,6 @@ export default defineNuxtConfig({
   eslint: {
     // options here
   },
-  vite: {
-    plugins: [
-      // inject({ Buffer: ['buffer/', 'Buffer'] }),
-      // inject({ nacl: ['tweetnacl-util/', 'tweetnacl-util'] })
-    ]
-  },
   runtimeConfig: {
     tonCenterApiKey: '',
     telegramBotKey: '',
@@ -68,7 +62,8 @@ export default defineNuxtConfig({
       botName: 'jumpover_bot',
       overleapRouterAddress: 'EQBr7Nj2lBZfUyMQOmg4s3WBSHXae0GhFdjDEqv-lW2nqITC',
       apiBase: '/api',
-      defaultPrice: '0.1'
+      defaultPrice: '0.1',
+      mixpanelToken: '3928ae541bb8a7d9d3093502d82732c6'
     }
   }
 });

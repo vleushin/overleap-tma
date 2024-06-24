@@ -29,6 +29,20 @@ const handleSendClick = () => {
   navigateTo('/send');
 };
 
+import mixpanel from 'mixpanel-browser';
+const runtimeConfig = useRuntimeConfig();
+mixpanel.init(runtimeConfig.public.mixpanelToken, {
+  debug: true,
+  ignore_dnt: true,
+  track_pageview: true,
+  persistence: 'localStorage'});
+const userId = WebApp.initDataUnsafe.user?.id;
+if (userId) {
+  mixpanel.identify(String(userId));
+}
+
+const startParam = WebApp.initDataUnsafe?.start_param;
+
 onMounted(() => {
   WebApp.ready();
 });
@@ -53,7 +67,7 @@ onMounted(() => {
       <Link :link="link" />
     </div>
     <div class="bottom-buttons-container">
-      <div v-if="address" class="secondary-button" @click="handleSendClick">✉️ Send</div>
+      <div v-if="startParam" class="secondary-button" @click="handleSendClick">✉️ Send</div>
       <div class="secondary-button" @click="navigateTo('/tutorial')">💡 Tutorial</div>
       <div class="secondary-button"
         @click="navigateTo('https://telegra.ph/FAQ--Overleap-06-21', { external: true, open: { target: '_blank' } })">🤔 FAQ

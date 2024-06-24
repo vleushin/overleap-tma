@@ -15,7 +15,7 @@ const { tonBalance, usdtBalance } = useBalances();
 const { tonConnectUI, setOptions: setTonConnectOptions } = useTonConnectUI();
 const { address: fromAddress } = useTonAddress();
 const startParam = WebApp.initDataUnsafe.start_param;
-const { toAddress, toName, toPrice } = useToAddress(startParam || 'xxx');
+const { toAddress, toName, toPrice } = useToAddress(startParam || '');
 const { animationData } = useLottie('deal');
 const textToSend = ref('');
 
