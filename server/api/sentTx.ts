@@ -1,7 +1,7 @@
-import { deserializeBoc } from '@ton/core/dist/boc/cell/serialization';
 import { validate } from '@tma.js/init-data-node';
 import { parseInitData } from '@tma.js/sdk';
 import { Telegram } from "telegraf";
+import TonWeb from "tonweb";
 import Sqids from 'sqids';
 
 export default defineEventHandler(async (event) => {
@@ -14,8 +14,9 @@ export default defineEventHandler(async (event) => {
   const price = body.price as string;
   const message = body.message as string;
   const boc = body.boc as string;
-  const bocCells = deserializeBoc(Buffer.from(boc, 'base64'));
-  const txHash = bocCells[0]!.hash().toString('hex');
+  const bocCells = TonWeb.boc.Cell.oneFromBoc(Buffer.from(boc, 'base64').toString('hex'));
+  const hashArray = await bocCells.hash();
+  const txHash = Buffer.from(hashArray).toString('hex');
   console.log('TX: ', txHash);
 
   const authorizationHeader = event.headers.get('Authorization');
