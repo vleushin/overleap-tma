@@ -22,7 +22,7 @@ const runtimeConfig = useRuntimeConfig();
 
 const { setLocale } = useI18n()
 const locale = WebApp.initDataUnsafe?.user?.language_code || 'en'
-setLocale(WebApp.initDataUnsafe?.user?.language_code || 'en');
+setLocale(locale);
 //setLocale('ru');
 </script>
 <template>

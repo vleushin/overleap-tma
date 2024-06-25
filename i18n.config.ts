@@ -1,6 +1,7 @@
 export default defineI18nConfig(() => ({
   legacy: false,
   locale: 'en',
+  fallbackLocale: 'en',
   messages: {
     en: {
       proveYourIntent: 'Prove your intent to connect by rewarding the reader with a commissionю',
