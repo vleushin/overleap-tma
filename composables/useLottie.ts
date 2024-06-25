@@ -12,7 +12,7 @@ interface useLottieComposableState {
  *
  * @param name - animation name
  */
-export default function useLottie(name: 'simp' | 'eyes' | 'love' | 'money' | 'hehehe' | 'deal'): useLottieComposableState {
+export default function useLottie(name: 'simp' | 'eyes' | 'love' | 'money' | 'hehehe' | 'deal' | 'fast' | 'social'): useLottieComposableState {
   /**
    * Lottie animation data
    */

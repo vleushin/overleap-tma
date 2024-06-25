@@ -8,31 +8,40 @@ import WebApp from '@twa-dev/sdk';
 
 const telegram = useTelegram();
 const { t } = useI18n()
-const { animationData: animationData1 } = useLottie('love');
-const { animationData: animationData2 } = useLottie('simp');
+const { animationData: animationData1 } = useLottie('social');
+const { animationData: animationData2 } = useLottie('love');
 const { animationData: animationData3 } = useLottie('money');
+const { animationData: animationData4 } = useLottie('simp');
+const { animationData: animationData5 } = useLottie('fast');
 
 const textsTop: { [key: number]: string } = {
-  1: t('tutorial0'),
-  2: t('tutorial2'),
-  3: ""
+  1: t('tutorial0Top'),
+  2: t('tutorial1Top'),
+  3: t('tutorial2Top'),
+  4: t('tutorial3Top'),
+  5: t('tutorial4Top')
 };
 
 const textsBottom: { [key: number]: string } = {
-  1: t('tutorial1'),
-  2: t('tutorial3'),
-  3: t('tutorial4')
+  1: t('tutorial0Bottom'),
+  2: t('tutorial1Bottom'),
+  3: t('tutorial2Bottom'),
+  4: t('tutorial3Bottom'),
+  5: t('tutorial4Bottom')
 };
+
 
 const animations: { [key: number]: any } = {
   1: animationData1,
   2: animationData2,
-  3: animationData3
+  3: animationData3,
+  4: animationData4,
+  5: animationData5,
 };
 
 const myCarousel = ref<any>(null);
 const slidingToIndex = ref(0);
-const slidesCount = ref(3);
+const slidesCount = ref(5);
 const isLastSlide = computed(() => {
   return slidingToIndex.value == slidesCount.value - 1;
 });
@@ -86,7 +95,7 @@ const startParam = initData.start_param || queryParams["startapp"];
 </script>
 <template>
   <Carousel ref="myCarousel" :items-to-show="1" @init="handleInit" @slide-start="handleSlideStart">
-    <Slide v-for="slide in 3" :key="slide">
+    <Slide v-for="slide in 5" :key="slide">
       <div class="carousel__item">
         <h1>{{ textsTop[slide] }}</h1>
         <Lottie v-if="animations[slide].value" :animation-data="animations[slide].value" width="150px" height="150px" />
