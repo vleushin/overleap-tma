@@ -32,7 +32,7 @@ export const useToAddress = (hashedId: string): useToAddressState => {
         toAddress.value = result.data.value!.address;
         toHashedId.value = hashedId;
         toName.value = result.data.value!.name;
-        toPrice.value = String(result.data.value!.price);
+        toPrice.value = Number(result.data.value!.price).toFixed(2);
         isReady.value = true;
         isLoading.value = false;
       } else {

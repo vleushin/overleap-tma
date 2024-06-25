@@ -49,7 +49,7 @@ onMounted(() => {
 <template>
   <div class="home-page">
     <Placeholder v-if="!address" ref="landing" class="landing" title="Overleap"
-      caption="Prove your intent to connect by rewarding the reader with a commission"
+      :caption="$t('proveYourIntent')"
       video-filename="/overleap-intro.mp4">
       <template #picture>
         <div class="landing-picture">
@@ -66,12 +66,12 @@ onMounted(() => {
       <Link :link="link" />
     </div>
     <div class="bottom-buttons-container">
-      <div v-if="startParam" class="secondary-button" @click="handleSendClick">✉️ Send</div>
+      <div v-if="startParam" class="secondary-button" @click="handleSendClick">✉️ {{ $t('send') }}</div>
       <!-- <div class="secondary-button" @click="navigateTo('/txSent')">💡 Tx</div> -->
-      <div class="secondary-button" @click="navigateTo('/tutorial')">💡 Tutorial</div>
-      <div class="secondary-button" @click="navigateTo('https://t.me/overleap_app', { external: true, open: { target: '_blank' }})">🤘 Community</div>
+      <div class="secondary-button" @click="navigateTo('/tutorial')">💡 {{ $t('guide') }}</div>
+      <div class="secondary-button" @click="navigateTo('https://t.me/overleap_app', { external: true, open: { target: '_blank' }})">🤘 {{ $t('community') }}</div>
       <div class="secondary-button"
-        @click="navigateTo('https://telegra.ph/FAQ--Overleap-06-21', { external: true, open: { target: '_blank' } })">🤔 FAQ
+        @click="navigateTo('https://telegra.ph/FAQ--Overleap-06-21', { external: true, open: { target: '_blank' } })">🤔 {{ $t('faq') }}
       </div>
     </div>
   </div>

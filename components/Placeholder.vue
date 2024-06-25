@@ -73,7 +73,7 @@ defineProps<{
         type="video/mp4">
       Your browser does not support the video tag.
     </video>
-<!--    <Rive src="/intro.riv" />-->
+   <!-- <Rive src="/overleap_intro.riv" /> -->
   </div>
 </template>
 

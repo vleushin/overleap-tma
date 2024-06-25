@@ -19,14 +19,14 @@ const changeButtonClick = () => {
 
 <template>
   <div class="price-container">
-    <h1>Price</h1>
+    <h1>{{ $t('price') }}</h1>
     <div class="token-container">
       <!-- eslint-disable-next-line vue/no-v-html -->
       <span class="icon-price" v-html="usdtSvgSource" />
       <span class="token-amount">{{ props.price || '...' }}</span>
       <span class="token-name">USD₮</span>
     </div>
-    <div class="secondary-button" @click="changeButtonClick">🚀 Set</div>
+    <div class="secondary-button" @click="changeButtonClick">🚀 {{ $t('set') }}</div>
   </div>
 </template>
 <style>

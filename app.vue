@@ -19,12 +19,18 @@ await callOnce(async () => {
   }
 });
 const runtimeConfig = useRuntimeConfig();
+
+const { setLocale } = useI18n()
+const locale = WebApp.initDataUnsafe?.user?.language_code || 'en'
+setLocale(WebApp.initDataUnsafe?.user?.language_code || 'en');
+//setLocale('ru');
 </script>
 <template>
   <div class="app">
     <TonConnectUIProvider
       :manifest-url="`${runtimeConfig.public.tonconnectManifestUrl}`"
-      :actions-configuration="{ twaReturnUrl: `https://t.me/${runtimeConfig.public.botName}` }">
+      :actions-configuration="{ twaReturnUrl: `https://t.me/${runtimeConfig.public.botName}` }"
+      :language="locale">
       <div class="app-header" /><!--Teleport location for PageWithHeader component-->
       <NuxtPage />
     </TonConnectUIProvider>

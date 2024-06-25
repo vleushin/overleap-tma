@@ -7,14 +7,21 @@ import useLottie from '../composables/useLottie';
 import WebApp from '@twa-dev/sdk';
 
 const telegram = useTelegram();
+const { t } = useI18n()
 const { animationData: animationData1 } = useLottie('love');
 const { animationData: animationData2 } = useLottie('simp');
 const { animationData: animationData3 } = useLottie('money');
 
-const texts: { [key: number]: string } = {
-  1: "Connect your wallet",
-  2: "Generate and share your link",
-  3: "Paid messages will be arriving"
+const textsTop: { [key: number]: string } = {
+  1: t('tutorial0'),
+  2: t('tutorial2'),
+  3: ""
+};
+
+const textsBottom: { [key: number]: string } = {
+  1: t('tutorial1'),
+  2: t('tutorial3'),
+  3: t('tutorial4')
 };
 
 const animations: { [key: number]: any } = {
@@ -51,7 +58,7 @@ const finishTutorial = () => {
 };
 
 const handleInit = () => {
-  telegram.showMainButton("Next", nextSlide);
+  telegram.showMainButton(t('next'), nextSlide);
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -60,9 +67,9 @@ const handleSlideStart = (data: any) => {
   slidesCount.value = data.slidesCount;
   if (isLastSlide.value) {
 
-    telegram.showMainButton("Finish", finishTutorial);
+    telegram.showMainButton(t('finish'), finishTutorial);
   } else {
-    telegram.showMainButton("Next", nextSlide);
+    telegram.showMainButton(t('next'), nextSlide);
   }
 
   if (!isFirstSlide.value) {
@@ -81,10 +88,9 @@ const startParam = initData.start_param || queryParams["startapp"];
   <Carousel ref="myCarousel" :items-to-show="1" @init="handleInit" @slide-start="handleSlideStart">
     <Slide v-for="slide in 3" :key="slide">
       <div class="carousel__item">
-        <div>{{ texts[slide] }}</div>
+        <h1>{{ textsTop[slide] }}</h1>
         <Lottie v-if="animations[slide].value" :animation-data="animations[slide].value" width="150px" height="150px" />
-        <div>{{ texts[slide] }}</div>
-        <div>{{ startParam }}</div>
+        <h1>{{ textsBottom[slide] }}</h1>
       </div>
     </Slide>
   </Carousel>
@@ -97,7 +103,7 @@ const startParam = initData.start_param || queryParams["startapp"];
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: calc(var(--tg-viewport-stable-height) - var(--size-cell-v-margin));
+  min-height: calc(var(--tg-viewport-stable-height) - var(--size-cell-v-margin) - var(--size-cell-h-margin));
   width: 100%;
   background-color: var(--color-bg-tertiary);
   color: var(--color-text);
@@ -113,5 +119,11 @@ const startParam = initData.start_param || queryParams["startapp"];
 .carousel__next {
   box-sizing: content-box;
   border: 5px solid white;
+}
+
+h1 {
+  margin-top: var(--spacing-28);
+  margin-bottom: var(--spacing-28);
+  max-width: 300px;
 }
 </style>

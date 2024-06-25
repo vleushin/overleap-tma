@@ -15,6 +15,8 @@ import WebApp from "@twa-dev/sdk";
 const { tonBalance, usdtBalance } = useBalances();
 const { tonConnectUI, setOptions: setTonConnectOptions } = useTonConnectUI();
 const { address: fromAddress } = useTonAddress();
+const { t } = useI18n()
+
 const startParam = WebApp.initDataUnsafe.start_param;
 const { toAddress, toHashedId, toName, toPrice } = useToAddress(startParam || '');
 const { animationData } = useLottie('deal');
@@ -75,7 +77,7 @@ const sendTx = async (fromAddress: string, toAddress: string, price: string) => 
 
 const showMainButton = () => {
   if (fromAddress.value) {
-    telegram.showMainButton("Send", () => {
+    telegram.showMainButton(t('send'), () => {
       sendTx(
         fromAddress.value,
         toAddress.value,
@@ -88,7 +90,6 @@ const showMainButton = () => {
 
 const telegram = useTelegram();
 onMounted(() => {
-  console.log('onMounted send!')
   showMainButton();
   watch(fromAddress, (newValue, oldValue) => {
     showMainButton();
@@ -100,7 +101,6 @@ onMounted(() => {
 });
 
 onBeforeRouteLeave(() => {
-  console.log('onUnmounted send!')
   telegram.hideBackButton();
   telegram.hideMainButton();
 });
@@ -113,12 +113,12 @@ onBeforeRouteLeave(() => {
     </div>
     <!-- <Input v-model="textToSend" placeholder="Enter message to send" /> -->
     <Balances v-if="fromAddress" :ton-balance="tonBalance" :usdt-balance="usdtBalance" />
-    <h2 v-if="!fromAddress">Please connect wallet first ☝️</h2>
+    <h2 v-if="!fromAddress">{{ $t('pleaseConnectYourWallet') }}</h2>
     <Lottie v-if="!fromAddress && animationData" :animation-data="animationData" width="150px" height="150px" />
-    <p v-if="fromAddress && toAddress">Your message to <strong>{{ toName }}</strong>:</p>
+    <p v-if="fromAddress && toAddress">{{ $t('yourMessageTo') }} <strong>{{ toName }}</strong>:</p>
     <Textarea v-if="fromAddress && toAddress" class="message-textarea" v-model="textToSend" :max-length="160"
-      placeholder="Enter message to send" />
-    <h3 v-if="fromAddress && toAddress"><strong>{{ toName }}</strong>'s price:</h3>
+      :placeholder="$t('enterMessageToSend')" />
+    <h3 v-if="fromAddress && toAddress" v-html="$t('toUserPrice', { toName })"></h3>
     <Price v-if="fromAddress && toAddress" :price="toPrice" token="usdt" label="USD₮" />
   </div>
 </template>

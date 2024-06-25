@@ -11,9 +11,11 @@ const { animationData } = useLottie('simp');
 const runtimeConfig = useRuntimeConfig();
 
 const telegram = useTelegram();
+const { t } = useI18n()
+
 onMounted(() => {
   console.log('onMounted txSent!')
-  telegram.showMainButton("Done", () => {
+  telegram.showMainButton(t('done'), () => {
     navigateTo('/');
   });
   telegram.showBackButton(() => {
@@ -33,9 +35,9 @@ const txHash = route.query.txHash;
 </script>
 <template>
   <div class="tx-sent-page">
-    <h1>Transaction sent!</h1>
+    <h1>{{ $t('transactionSent')}}</h1>
     <p class="caption">
-      It usually takes 20 seconds for transactions to finalize.
+      {{ $t('itUsuallyTakes20Seconds')}}
     </p>
     <Lottie v-if="animationData" :animation-data="animationData" width="150px" height="150px" />
     <div class="tonscan-container">

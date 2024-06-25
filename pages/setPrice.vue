@@ -9,13 +9,14 @@ import Lottie from "../components/Lottie.vue";
 
 
 const telegram = useTelegram();
+const { t } = useI18n()
 const { price, setPrice } = usePrice();
 const { animationData } = useLottie('hehehe');
 
 const priceToSet = ref('');
 
 onMounted(() => {
-  telegram.showMainButton("Set", () => {
+  telegram.showMainButton(t('save'), () => {
     if (priceToSet.value && Number(priceToSet.value) > 0) {
       setPrice(Math.abs(Number(priceToSet.value)));
     }
@@ -33,9 +34,8 @@ onBeforeRouteLeave(() => {
 </script>
 <template>
   <div class="set-price-container">
-    <h1>Set price</h1>
-    <p>Setting prices is individual for everybody. We recommend starting between $1 and
-      $5. But sky is the limit.</p>
+    <h1>{{ $t('setYourAttentionPrice') }}</h1>
+    <p>{{ $t('settingPricesIsIndividual') }} </p>
     <Lottie v-if="animationData" :animation-data="animationData" width="150px" height="150px" />
     <PriceInput v-model="priceToSet" :placeholder="price" />
   </div>

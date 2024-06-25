@@ -9,14 +9,16 @@ export default defineNuxtConfig({
   ssr: false,
   modules: [
     '@nuxt/eslint',
+    ['@nuxtjs/i18n', {
+      // Module Options
+    }],
     ["@nuxtjs/google-fonts", {
       families: {
         Roboto: [400, 500, 700, 900],
         Inter: true,
         'Open+Sans': true
       }
-    }]
-  ],
+    }], "@nuxtjs/i18n"],
   postcss: {
     plugins: {
       'postcss-apply': {},
