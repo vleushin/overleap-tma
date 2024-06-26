@@ -19,7 +19,6 @@ await callOnce(async () => {
   }
 });
 const runtimeConfig = useRuntimeConfig();
-
 const { setLocale } = useI18n()
 const locale = WebApp.initDataUnsafe?.user?.language_code || 'en'
 setLocale(locale);

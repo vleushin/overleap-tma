@@ -28,20 +28,8 @@ const handleSendClick = () => {
   navigateTo('/send');
 };
 
-import mixpanel from 'mixpanel-browser';
 const runtimeConfig = useRuntimeConfig();
-mixpanel.init(runtimeConfig.public.mixpanelToken, {
-  debug: true,
-  ignore_dnt: true,
-  track_pageview: true,
-  persistence: 'localStorage'});
-const userId = WebApp.initDataUnsafe.user?.id;
-if (userId) {
-  mixpanel.identify(String(userId));
-}
-
 const startParam = WebApp.initDataUnsafe?.start_param;
-
 onMounted(() => {
   WebApp.ready();
 });

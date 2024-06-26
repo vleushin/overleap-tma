@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import useTelegram from "../composables/useTelegram";
-import useLottie from "../composables/useLottie";
 import { ref, onMounted, onUnmounted } from "vue";
 import { onBeforeRouteLeave } from 'vue-router';
 import { navigateTo } from "nuxt/app";
+import useLottie from "../composables/useLottie";
+import useTelegram from "../composables/useTelegram";
 import { usePrice } from "../composables/usePrice";
 import Lottie from "../components/Lottie.vue";
 
@@ -12,13 +12,16 @@ const telegram = useTelegram();
 const { t } = useI18n()
 const { price, setPrice } = usePrice();
 const { animationData } = useLottie('hehehe');
+const { trackEvent } = useMixpanel();
 
 const priceToSet = ref('');
 
 onMounted(() => {
   telegram.showMainButton(t('save'), () => {
     if (priceToSet.value && Number(priceToSet.value) > 0) {
-      setPrice(Math.abs(Number(priceToSet.value)));
+      const newPrice = Math.abs(Number(priceToSet.value));
+      setPrice(newPrice);
+      trackEvent("price_set", {price: newPrice})
     }
     navigateTo("/");
   });

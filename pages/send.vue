@@ -20,7 +20,28 @@ const { t } = useI18n()
 const startParam = WebApp.initDataUnsafe.start_param;
 const { toAddress, toHashedId, toName, toPrice } = useToAddress(startParam || '');
 const { animationData } = useLottie('deal');
+const { trackEvent } = useMixpanel();
 const textToSend = ref('');
+
+const hasEnoughUsdt = computed(() => {
+  if (toPrice.value && usdtBalance.value) {
+    return Number(usdtBalance.value) - Number(toPrice.value) > 0;
+  } else {
+    return true;
+  }
+});
+
+const hasEnoughTon = computed(() => {
+  if (tonBalance.value) {
+    return Number(tonBalance.value) > 0.1;
+  } else {
+    return true;
+  }
+});
+
+const hasEnoughFunds = computed(() => {
+  return hasEnoughUsdt.value && hasEnoughTon.value;
+});
 
 const runtimeConfig = useRuntimeConfig();
 
@@ -52,7 +73,7 @@ const sendTx = async (fromAddress: string, toAddress: string, price: string) => 
   });
   if (data.value) {
     const result = await tonConnectUI.sendTransaction(data.value);
-    console.log(result);
+    trackEvent("transaction_sent", {hashedId: startParam, price: Number(toPrice.value)})
 
     const { data: txData } = await useFetch<PostSentTxType>('/api/sentTx', {
       method: 'POST',
@@ -98,6 +119,7 @@ onMounted(() => {
     navigateTo('/');
   });
   WebApp.ready();
+  trackEvent("deeplink_send", { hashedId: startParam });
 });
 
 onBeforeRouteLeave(() => {
@@ -120,6 +142,9 @@ onBeforeRouteLeave(() => {
       :placeholder="$t('enterMessageToSend')" />
     <h3 v-if="fromAddress && toAddress" v-html="$t('toUserPrice', { toName })"></h3>
     <Price v-if="fromAddress && toAddress" :price="toPrice" token="usdt" label="USD₮" />
+    <p v-if="!hasEnoughFunds" class="error">{{ $t('topUp0') }}</p>
+    <p v-if="!hasEnoughFunds" class="error">{{ $t('topUp1') }}</p>
+    <p v-if="!hasEnoughFunds" class="error">{{ $t('topUp2') }}</p>
   </div>
 </template>
 <style scoped>
@@ -169,5 +194,11 @@ p {
   margin-top: var(--spacing-10);
   color: var(--color-hint);
   max-width: 300px;
+  text-align: center;
+}
+
+.error {
+  color: salmon;
+  font-weight: 800;
 }
 </style>

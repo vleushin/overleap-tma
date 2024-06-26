@@ -4,7 +4,7 @@ export default defineI18nConfig(() => ({
   fallbackLocale: 'en',
   messages: {
     en: {
-      proveYourIntent: 'Prove your intent to connect by rewarding the reader with a commissionю',
+      proveYourIntent: 'Prove your intent to connect by rewarding the reader with a commission',
       guide: 'Guide',
       community: 'Community',
       price: 'Price',
@@ -35,6 +35,9 @@ export default defineI18nConfig(() => ({
       tutorial3Bottom: 'Share Your Link',
       tutorial4Top: 'You\'re set!',
       tutorial4Bottom: 'The more places you share your link, the better your chances of getting paid!',
+      topUp0: 'Unsufficient funds!',
+      topUp1: 'Top up your wallet with USDT & TON to send your message!',
+      topUp2: 'Add Crypto with your credit card in the Wallet!',
     },
     ru: {
       proveYourIntent: 'Дай повод тебе ответить - отправь платное сообщение получателю.',
@@ -68,6 +71,9 @@ export default defineI18nConfig(() => ({
       tutorial3Bottom: 'Поделись своей ссылкой',
       tutorial4Top: 'Всё готово!',
       tutorial4Bottom: 'Разместите ссылку во всех социальных сетях, чтобы повысить шансы на получение платного сообщения.',
+      topUp0: 'Недостаточно средств!',
+      topUp1: 'Пополните свой кошелек USDT и TON, чтобы отправить сообщение!',
+      topUp2: 'Пополните с помощью банковской карты в кошельке!',
     }
   }
 }))
