@@ -14,6 +14,7 @@ definePageMeta({
 const userWalletInStorage = useStorage<string>('userWallet', '');
 const tutorialCompleted = useStorage<boolean>('tutorialCompleted', false);
 const { price, isReady, isLoading } = usePrice();
+const { link } = useMyLink();
 const { setOptions: setTonConnectOptions } = useTonConnectUI();
 const { address } = useTonAddress();
 const landing = ref<InstanceType<typeof Placeholder> | null>(null);
