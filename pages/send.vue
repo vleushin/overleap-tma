@@ -73,7 +73,7 @@ const sendTx = async (fromAddress: string, toAddress: string, price: string) => 
   });
   if (data.value) {
     const result = await tonConnectUI.sendTransaction(data.value);
-    trackEvent("transaction_sent", {hashedId: startParam, price: Number(toPrice.value)})
+    trackEvent("transaction_sent", {hashedId: startParam, price: Number(toPrice.value)});
 
     const { data: txData } = await useFetch<PostSentTxType>('/api/sentTx', {
       method: 'POST',

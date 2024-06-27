@@ -42,7 +42,7 @@ export default defineEventHandler(async (event) => {
         const toUserId = Number(sqids.decode(toHashedId));
 
         const telegram = new Telegram(runtimeConfig.telegramBotKey)
-        await telegram.sendMessage(toUserId, `(NEW MINI APP) You got message from @${fromUsername} (paid ${price} USDT)!\n\n` + message,
+        await telegram.sendMessage(toUserId, `You got message from @${fromUsername} (paid ${price} USDT)!\n\n` + message,
                 {
                     reply_markup: {
                         inline_keyboard: [

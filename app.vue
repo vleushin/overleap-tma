@@ -18,11 +18,11 @@ await callOnce(async () => {
     link.value = data.link;
   }
 });
+
 const runtimeConfig = useRuntimeConfig();
 const { setLocale } = useI18n()
 const locale = WebApp.initDataUnsafe?.user?.language_code || 'en'
 setLocale(locale);
-//setLocale('ru');
 </script>
 <template>
   <div class="app">
