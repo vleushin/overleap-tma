@@ -12,21 +12,33 @@ definePageMeta({
 });
 
 const userWalletInStorage = useStorage<string>('userWallet', '');
-const tutorialCompleted = useStorage<boolean>('tutorialCompleted', false);
+const tutorialCompletedInStorage = useStorage<boolean>('tutorialCompleted', false);
+const copyLinkClickedInStorage = useStorage<boolean>('copyLinkClicked', false);
+const priceChangedInStorage = useStorage<boolean>('priceChanged', false);
+
+const hasAccessToSecret = computed(() => {
+  return userWalletInStorage.value && copyLinkClickedInStorage.value && priceChangedInStorage.value
+});
+
 const { price, isReady, isLoading } = usePrice();
 const { link } = useMyLink();
 const { setOptions: setTonConnectOptions } = useTonConnectUI();
 const { address } = useTonAddress();
+const telegram = useTelegram();
 const landing = ref<InstanceType<typeof Placeholder> | null>(null);
 
 const resetTutorial = () => {
-  tutorialCompleted.value = false;
+  tutorialCompletedInStorage.value = false;
   navigateTo('/tutorial');
 };
 
 const handleSendClick = () => {
   navigateTo('/send');
 };
+
+const handleSecretPasswordClick = () => {
+  telegram.showAlert("🔑: “what’s the password?”");
+}
 
 const runtimeConfig = useRuntimeConfig();
 const startParam = WebApp.initDataUnsafe?.start_param;
@@ -37,8 +49,7 @@ onMounted(() => {
 </script>
 <template>
   <div class="home-page">
-    <Placeholder v-if="!address" ref="landing" class="landing" title="Overleap"
-      :caption="$t('proveYourIntent')"
+    <Placeholder v-if="!address" ref="landing" class="landing" title="Overleap" :caption="$t('proveYourIntent')"
       video-filename="/overleap-intro.mp4">
       <template #picture>
         <div class="landing-picture">
@@ -58,10 +69,15 @@ onMounted(() => {
       <div v-if="startParam" class="secondary-button" @click="handleSendClick">✉️ {{ $t('send') }}</div>
       <!-- <div class="secondary-button" @click="navigateTo('/txSent')">💡 Tx</div> -->
       <div class="secondary-button" @click="navigateTo('/tutorial')">💡 {{ $t('guide') }}</div>
-      <div class="secondary-button" @click="navigateTo('https://t.me/overleap_app', { external: true, open: { target: '_blank' }})">🤘 {{ $t('community') }}</div>
       <div class="secondary-button"
-        @click="navigateTo('https://telegra.ph/FAQ--Overleap-06-21', { external: true, open: { target: '_blank' } })">🤔 {{ $t('faq') }}
+        @click="navigateTo('https://t.me/overleap_app', { external: true, open: { target: '_blank' } })">🤘 {{
+          $t('community') }}</div>
+      <div class="secondary-button"
+        @click="navigateTo('https://telegra.ph/FAQ--Overleap-06-21', { external: true, open: { target: '_blank' } })">🤔
+        {{
+          $t('faq') }}
       </div>
+      <div v-if="hasAccessToSecret" class="secondary-button" @click="handleSecretPasswordClick">{{ $t('secretPassword') }}</div>
     </div>
   </div>
 </template>

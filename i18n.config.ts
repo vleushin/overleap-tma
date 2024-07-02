@@ -38,6 +38,7 @@ export default defineI18nConfig(() => ({
       topUp0: 'Unsufficient funds!',
       topUp1: 'Top up your wallet with USDT & TON to send your message!',
       topUp2: 'Add Crypto with your credit card in the Wallet!',
+      secretPassword: '🔑 secret password',
     },
     ru: {
       proveYourIntent: 'Дай повод тебе ответить - отправь платное сообщение получателю.',
@@ -74,6 +75,7 @@ export default defineI18nConfig(() => ({
       topUp0: 'Недостаточно средств!',
       topUp1: 'Пополните свой кошелек USDT и TON, чтобы отправить сообщение!',
       topUp2: 'Пополните с помощью банковской карты в кошельке!',
+      secretPassword: '🔑 секретный пароль',
     }
   }
 }))

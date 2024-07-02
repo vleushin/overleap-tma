@@ -1,4 +1,5 @@
 import { ref, type Ref } from 'vue';
+import { useStorage } from '@vueuse/core';
 import WebApp from '@twa-dev/sdk';
 
 interface usePriceState {
@@ -16,6 +17,8 @@ type GetPriceType = {
   price: string
 }
 
+
+const priceChangedInStorage = useStorage<boolean>('priceChanged', false);
 const price = useState('price', () => '');
 const isReady = ref(false);
 const isLoading = ref(false);
@@ -35,6 +38,7 @@ const setPrice = async (newPrice: number) => {
     price.value = (Number(data.value.price)).toFixed(2);
     isReady.value = true;
     isLoading.value = false;
+    priceChangedInStorage.value = true;
   } else {
     isReady.value = false;
     isLoading.value = true;

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useClipboard, useStorage } from '@vueuse/core';
 
 const props = defineProps<{
   modelValue: string;
@@ -7,11 +8,14 @@ const props = defineProps<{
 }>();
 
 const telegram = useTelegram();
+const { copy } = useClipboard({ source: props.modelValue });
 
-function copyToClipboard() {
-  navigator.clipboard.writeText(props.modelValue);
+const copyLinkClickedInStorage = useStorage<boolean>('copyLinkClicked', false);
+
+const copyToClipboard = () => {
+  copy();
+  copyLinkClickedInStorage.value = true
   telegram.vibrate('success');
-  //telegram.showAlert("Link copied!");
 }
 
 </script>
