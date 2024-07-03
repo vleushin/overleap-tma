@@ -24,8 +24,8 @@ const share = () => {
   copy();
   copyLinkClickedInStorage.value = true;
   telegram.vibrate('success');
-  WebApp.switchInlineQuery(`123`, [ 'users', 'groups', 'channels' ]);
-  //navigateTo(`https://t.me/share/url?url=${encodeURIComponent(props.modelValue)}`, {external: true});
+  //WebApp.switchInlineQuery(`123`, [ 'users', 'groups', 'channels' ]);
+  navigateTo(`https://t.me/share/url?url=${encodeURIComponent(props.modelValue)}`, {external: true});
 }
 
 </script>
