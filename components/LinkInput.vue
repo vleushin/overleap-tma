@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { useClipboard, useStorage } from '@vueuse/core';
+import WebApp from '@twa-dev/sdk';
 
 const props = defineProps<{
   modelValue: string;
   placeholder?: string;
   rightIcon?: string;
+  rightIcon2?: string;
 }>();
 
 const telegram = useTelegram();
@@ -14,8 +16,16 @@ const copyLinkClickedInStorage = useStorage<boolean>('copyLinkClicked', false);
 
 const copyToClipboard = () => {
   copy();
-  copyLinkClickedInStorage.value = true
+  copyLinkClickedInStorage.value = true;
   telegram.vibrate('success');
+}
+
+const share = () => {
+  copy();
+  copyLinkClickedInStorage.value = true;
+  telegram.vibrate('success');
+  WebApp.switchInlineQuery(`123`, [ 'users', 'groups', 'channels' ]);
+  //navigateTo(`https://t.me/share/url?url=${encodeURIComponent(props.modelValue)}`, {external: true});
 }
 
 </script>
@@ -24,6 +34,7 @@ const copyToClipboard = () => {
   <div class="input">
     <input type="text" :placeholder="placeholder" :value="modelValue" readonly>
     <Icon v-if="rightIcon" :name="rightIcon" @click="copyToClipboard" />
+    <Icon v-if="rightIcon2" :name="rightIcon2" @click="share" />
   </div>
 </template>
 

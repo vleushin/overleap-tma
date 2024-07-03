@@ -20,7 +20,7 @@ const qrSvg = vkQr.createQR(props.link, {
 <template>
   <div class="link-container">
     <p>{{ $t('yourInboxLink') }}</p>
-    <LinkInput class="link-input" :model-value="props.link" right-icon="copy" />
+    <LinkInput class="link-input" :model-value="props.link" right-icon="copy" right-icon2="share-ios"/>
     <div v-html="qrSvg" />
   </div>
 </template>
