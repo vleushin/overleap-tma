@@ -3,6 +3,7 @@ import WebApp from '@twa-dev/sdk';
 import vkQr from '@vkontakte/vk-qr';
 
 const props = defineProps<{
+  hashedId: string;
   link: string;
 }>();
 
@@ -20,7 +21,7 @@ const qrSvg = vkQr.createQR(props.link, {
 <template>
   <div class="link-container">
     <p>{{ $t('yourInboxLink') }}</p>
-    <LinkInput class="link-input" :model-value="props.link" right-icon="copy" right-icon2="share-ios"/>
+    <LinkInput class="link-input" :model-value="props.link" :hashed-id="props.hashedId" right-icon="copy" right-icon2="share-ios"/>
     <div v-html="qrSvg" />
   </div>
 </template>

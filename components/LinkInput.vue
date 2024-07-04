@@ -4,6 +4,7 @@ import WebApp from '@twa-dev/sdk';
 
 const props = defineProps<{
   modelValue: string;
+  hashedId: string;
   placeholder?: string;
   rightIcon?: string;
   rightIcon2?: string;
@@ -24,8 +25,8 @@ const share = () => {
   copy();
   copyLinkClickedInStorage.value = true;
   telegram.vibrate('success');
-  //WebApp.switchInlineQuery(`123`, [ 'users', 'groups', 'channels' ]);
-  navigateTo(`https://t.me/share/url?url=${encodeURIComponent(props.modelValue)}`, {external: true});
+  WebApp.switchInlineQuery(props.hashedId, [ 'users', 'groups', 'channels' ]);
+  //navigateTo(`https://t.me/share/url?url=${encodeURIComponent(props.modelValue)}`, {external: true});
 }
 
 </script>
@@ -55,14 +56,14 @@ const share = () => {
     align-content: center;
     justify-content: center;
     self-align: center;
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
   }
 
   :deep(svg) {
     fill: currentColor;
-    width: 21px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
   }
 
   :deep(svg:hover) {

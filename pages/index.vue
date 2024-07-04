@@ -21,7 +21,7 @@ const hasAccessToSecret = computed(() => {
 });
 
 const { price, isReady, isLoading } = usePrice();
-const { link } = useMyLink();
+const { hashedId, link } = useMyLink();
 const { setOptions: setTonConnectOptions } = useTonConnectUI();
 const { address } = useTonAddress();
 const telegram = useTelegram();
@@ -63,7 +63,7 @@ onMounted(() => {
     </div>
     <div v-if="address">
       <YourPrice :price="price" />
-      <Link :link="link" />
+      <Link :link="link" :hashed-id="hashedId" />
     </div>
     <div class="bottom-buttons-container">
       <div v-if="startParam" class="secondary-button" @click="handleSendClick">✉️ {{ $t('send') }}</div>
