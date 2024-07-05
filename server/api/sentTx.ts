@@ -30,7 +30,9 @@ export default defineEventHandler(async (event) => {
         const sqids = new Sqids({
           alphabet: runtimeConfig.sqidsAlphabet,
         });
-        // TODO checks
+        //
+        // TODO check the tx!!!!
+        //
         // const redis = new Redis({
         //   url: runtimeConfig.redisUrl,
         //   token: runtimeConfig.redisToken,

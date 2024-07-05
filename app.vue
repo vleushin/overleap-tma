@@ -16,6 +16,11 @@ await callOnce(async () => {
   if (data) {
     hashedId.value = data.hashedId;
     link.value = data.link;
+
+    // TODO refreshing bot strips `WebApp.initData`, not sure how to handle, just closing the app
+    if (hashedId.value === "hashedId") {
+      WebApp.close();
+    }
   }
 });
 
@@ -26,10 +31,8 @@ setLocale(locale);
 </script>
 <template>
   <div class="app">
-    <TonConnectUIProvider
-      :manifest-url="`${runtimeConfig.public.tonconnectManifestUrl}`"
-      :actions-configuration="{ twaReturnUrl: `https://t.me/${runtimeConfig.public.botName}` }"
-      :language="locale">
+    <TonConnectUIProvider :manifest-url="`${runtimeConfig.public.tonconnectManifestUrl}`"
+      :actions-configuration="{ twaReturnUrl: `https://t.me/${runtimeConfig.public.botName}` }" :language="locale">
       <div class="app-header" /><!--Teleport location for PageWithHeader component-->
       <NuxtPage />
     </TonConnectUIProvider>

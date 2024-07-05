@@ -46,6 +46,9 @@ const startParam = WebApp.initDataUnsafe?.start_param;
 onMounted(() => {
   WebApp.ready();
 });
+
+const locale = WebApp.initDataUnsafe?.user?.language_code || 'en'
+const faqUrl = locale === 'ru' ? 'https://telegra.ph/FAQ--Overleap-07-05' : 'https://telegra.ph/FAQ--Overleap-06-21';
 </script>
 <template>
   <div class="home-page">
@@ -73,7 +76,7 @@ onMounted(() => {
         @click="navigateTo('https://t.me/overleap_app', { external: true, open: { target: '_blank' } })">🤘 {{
           $t('community') }}</div>
       <div class="secondary-button"
-        @click="navigateTo('https://telegra.ph/FAQ--Overleap-06-21', { external: true, open: { target: '_blank' } })">🤔
+        @click="navigateTo(faqUrl, { external: true, open: { target: '_blank' } })">🤔
         {{
           $t('faq') }}
       </div>
